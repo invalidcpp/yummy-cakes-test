@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= cake.name %></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/bf618122db.js" crossorigin="anonymous"></script>
+    <script src="/media/js/rating.js"></script>
+    <link rel="stylesheet" href="/media/css/style.css">
+</head>
+<body class="cakebody">
+    <div class="container">
+        <h1 style="margin: 20px; text-align: center"><%=cake.name %></h1>
+        <img src=<%= cake.imageURL %> alt="" class="img-fluid" style="display: block; margin: 0 auto">
+        <div class="button-container" style="text-align: center; margin: 20px;">
+            <button id="updateCake" class="btn btn-warning"  data-toggle="collapse" data-target=".updatecakeContainer" aria-expanded="false" aria-controls=".updatecakeContainer">Update</button>
+            <button id="deleteCake" class="btn btn-danger" onclick="deleteCake()">Delete</button>
+            <button id="addComment" class="btn btn-primary" style="display: block; margin: 10px auto" data-toggle="collapse" data-target=".addcommentContainer" aria-expanded="false" aria-controls=".addcommentContainer">Add Comment</button>
+        </div>
+        <div class="container-fluid">
+            <div id="alert_placeholder"></div>
+            <div class="addcommentContainer collapse">
+                <form>
+                    <div class="form-group">
+                        <label for="commentName">Name:</label>
+                        <input type="text" class="form-control" id="commentName" aria-describedby="commentNameSM" placeholder="Your Name..." required>
+                        <small id="commentNameSM" class="form-text text-muted">Let us know whos talking about our lovely cakes 😛</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="cakeIMG">Message:</label>
+                        <textarea minlength="5" maxlength="200" type="text" class="form-control" id="commentMsg" aria-describedby="commentMsgSM" placeholder="Your Message..."></textarea>
+                        <small id="commentMsgSM" class="form-text text-muted">Tell us how much you love our cake 😍</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="commentRate">Rate your cake:</label>
+                        <div class="comment-rater-holder">
+                            <div class="my-rating" id="my-comment-rating" aria-describedby="commentRatingSM"></div>
+                        </div>
+                        <small id="commentRatingSM" class="form-text text-muted">Rate your cake 🤩</small>
+                    </div>
+                    <button type="submit" onclick="addComment(event)" class="btn btn-primary">Comment</button>
+                </form>
+            </div>
+            <div class="updatecakeContainer collapse">
+                <form>
+                    <div class="form-group">
+                        <label for="updateCakeName">Cake Name:</label>
+                        <input type="text" class="form-control" id="updateCakeName" aria-describedby="updateCakeNameSM" placeholder="Cake Name..." required>
+                        <small id="updateCakeNameSM" class="form-text text-muted">Give your yummy cake a name 😍</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateCakeIMG">Cake Image URL:</label>
+                        <input type="text" class="form-control" id="updateCakeIMG" aria-describedby="updateCakeIMGSM" placeholder="Cake Image URL...">
+                        <small id="updateCakeIMGSM" class="form-text text-muted">Lets have a peak at that cake 👀</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="my-update-rating">Rate your cake:</label>
+                        <div class="update-rater-holder">
+                            <div class="my-rating" id="my-update-rating" aria-describedby="updateRatingSM"></div>
+                        </div>
+                        <small id="updateRatingSM" class="form-text text-muted">Rate your cake 🤩</small>
+                    </div>
+                    <button type="submit" onclick="updateCake(event)" class="btn btn-warning">Update</button>
+                </form>
+            </div>
+            <div class="commentsList">
+
+            </div>
+            <hr>
+        </div>
+    </div>
+    <input type="hidden" class="cakeID" value=<%=cake._id%>>
+    <script src="/media/js/main.js"></script>
+</body>
+</html>
