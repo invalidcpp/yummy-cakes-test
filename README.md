@@ -1,11 +1,12 @@
 # yummy-cakes-test
 A yummy cake test
 
-# Usage
+# Installation
 ```console
 npm install
 ```
-```
+# Usage
+```console
 npm start
 ```
 
