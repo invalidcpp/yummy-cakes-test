@@ -160,7 +160,6 @@ function updateCommentList(){
         success: function(results) {
             $(".commentsList").html("");
             for(var i = 0; i < results.comments.length; i++){
-                console.log(i)
                 var html = $(`
                     <div class="comment-container">
                         <h3 class="comment-name">

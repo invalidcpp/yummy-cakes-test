@@ -106,8 +106,7 @@ function deleteCake(id) {
         const cake = await cakeSchema.findOne({_id: id})
         cake.delete()
         .then(() => { resolve("Deleted cake") })
-        .catch((err) => { 
-            console.log(err); 
+        .catch((err) => {
             reject("Unable to delete cake") 
         })
     });
