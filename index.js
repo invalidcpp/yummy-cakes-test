@@ -21,8 +21,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/seed", async (req, res) => {
-    await seedb.seedb(10, 5);
-    return res.redirect("/");
+    await seedb.seedb(10, 5).then(() => { return res.redirect("/"); })
+    .catch((err) => { return res.status(500).json({error: err}); })
 });
 
 app.listen(3000, () => {

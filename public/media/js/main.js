@@ -211,6 +211,9 @@ function seedDB(e) {
         method: "GET",
         success: function(){
             window.location = "/";
+        },
+        error: function(error) {
+            showalert(error.responseJSON.error.toString())
         }
     });
 }

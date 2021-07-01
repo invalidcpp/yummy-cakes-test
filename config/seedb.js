@@ -21,23 +21,26 @@ randomName = [
     "Frank"
 ]
 
-module.exports.seedb = async function(amountofCakes, amountofComments) {
-    for(var i = 0; i < amountofCakes; i++){
-        await cakeController.createCake("Cake-" + i, cakePictures[Math.floor(Math.random()*cakePictures.length)], Math.floor(Math.random() * 11) / 2)
-        .then(async (res) => {
-            cakeID = res.replace("Created Cake: ", "");
-            cakeID = JSON.parse(cakeID)
-            for(var j = 0; j < amountofComments; j++) {
-                const comment = {
-                    "name":  randomName[Math.floor(Math.random()*randomName.length)],
-                    "message": randomComment[Math.floor(Math.random()*randomComment.length)],
-                    "yumFactor": Math.floor(Math.random() * 11) / 2
+module.exports.seedb = function(amountofCakes, amountofComments) {
+    return new Promise(async (resolve, reject) => {
+        for(var i = 0; i < amountofCakes; i++){
+            await cakeController.createCake("Cake-" + i, cakePictures[Math.floor(Math.random()*cakePictures.length)], Math.floor(Math.random() * 11) / 2)
+            .then(async (res) => {
+                cakeID = res.replace("Created Cake: ", "");
+                cakeID = JSON.parse(cakeID)
+                for(var j = 0; j < amountofComments; j++) {
+                    const comment = {
+                        "name":  randomName[Math.floor(Math.random()*randomName.length)],
+                        "message": randomComment[Math.floor(Math.random()*randomComment.length)],
+                        "yumFactor": Math.floor(Math.random() * 11) / 2
+                    }
+                    await cakeController.updateCake(comment, comment.name, comment.message, comment.yumFactor, undefined, cakeID.toString())
                 }
-                await cakeController.updateCake(comment, comment.name, comment.message, comment.yumFactor, undefined, cakeID.toString())
-            }
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }
+                resolve();
+            })
+            .catch((error) => {
+                reject(error)
+            })
+        }
+    });
 }
